@@ -7,7 +7,8 @@ output:
 
 
 ## Loading and preprocessing the data
-```{r}
+
+```r
 library(plyr)
 library(ggplot2)
 
@@ -15,7 +16,8 @@ unzip("activity.zip")
 ```
 
 ## Reading csv Data into Data.Table. 
-```{r}
+
+```r
 activity <- read.csv("activity.csv")
 #summary(activity)
 
@@ -27,21 +29,36 @@ clean <- activity[!is.na(activity$steps),]
 ```
 
 ## What is mean total number of steps taken per day?
-```{r}
+
+```r
 ## summarizing total steps per date
 sumTable <- aggregate(activity$steps ~ activity$date, FUN=sum, )
 colnames(sumTable)<- c("Date", "Steps")
 
 ## Making a histogram of total number of steps taken per day
 hist(sumTable$Steps, breaks=5, xlab="Steps", main = "Total Steps per Day")
+```
 
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+
+```r
 ## Mean of Steps
 mean_steps <- as.integer(mean(sumTable$Steps))
 mean_steps
+```
 
+```
+## [1] 10766
+```
+
+```r
 ## Median of Steps
 median_steps <- as.integer(median(sumTable$Steps))
 median_steps
+```
+
+```
+## [1] 10765
 ```
 - Average number of steps taken per day is `mean_steps`
 - Median number of steps taken per day is `median_steps`
